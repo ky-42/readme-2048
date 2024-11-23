@@ -1,20 +1,3 @@
-<h3 align="center">Hello Traveler!</h3>
-
-<p align="center">
-  <a href="https://kyledenief.me">Website</a>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <b>I'm Kyle</b>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="https://x.com/ky421_">Twitter</a>
-</p>
-
-<hr>
-</br>
-
-<p align="center">I like making things.</p>
-
-</br>
-
 <h3 align="center">2048</h3>
 <p align="center">
   The current score is 24{% if end_date is not none %} and the highscore is {{ highscore }} which was set on {{ end_date }}.{% else %}.{% endif %}

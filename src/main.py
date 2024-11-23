@@ -67,7 +67,7 @@ def click(request: Request, direction: int):
 
     git.update(
         render_template(
-            "readme.md",
+            "combined_readme.md",
             current=current_score,
             highscore=highscore_info[0],
             end_date=highscore_info[1],
