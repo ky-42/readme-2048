@@ -5,11 +5,11 @@
 
 <p align="center">
   &nbsp;&nbsp;
-  <a href="{{server_address}}/click/3">Left</a>
+  <a href="{{server_address}}click/3">Left</a>
   &nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="{{server_address}}/click/1">Up</a>
+  <a href="{{server_address}}click/1">Up</a>
   &nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="{{server_address}}/click/4">Right</a>
+  <a href="{{server_address}}click/4">Right</a>
 </p>
 
 <table align="center">
@@ -27,4 +27,4 @@
 {% endfor %}
 </table>
 
-<p align="center"><a href="{{server_address}}/click/2">Down</a></p>
+<p align="center"><a href="{{server_address}}click/2">Down</a></p>

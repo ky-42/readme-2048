@@ -90,8 +90,8 @@ def save(grid: List[List[int]], old_grid: Optional[List[List[int]]] = None) -> N
 
     with psycopg.connect(DATABASE_URI()) as conn:
         with conn.cursor() as cur:
-            for y in range(dimensions[0]):
-                for x in range(dimensions[1]):
+            for x in range(dimensions[0]):
+                for y in range(dimensions[1]):
                     if old_grid is not None and grid[y][x] != old_grid[y][x]:
                         cur.execute(
                             "UPDATE square SET value = %s WHERE x = %s AND y = %s",

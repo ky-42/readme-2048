@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Flask, Request, redirect, render_template
+from flask import Flask, redirect, render_template, request
 
 import game_round
 import game_storage
@@ -18,14 +18,14 @@ app.config.update(
 
 
 @app.route("/")
-def setup(request: Request):
+def setup():
     """Use when first deployed to get the file to update."""
 
-    return click(request, 1)
+    return click(1)
 
 
 @app.route("/click/<int:direction>")
-def click(request: Request, direction: int):
+def click(direction: int):
     """Handle a click event on the game board."""
 
     # Create new game if no game is loaded
@@ -39,7 +39,7 @@ def click(request: Request, direction: int):
             game_round.end(0, datetime.now())
             game_round.start()
 
-    starting_grid = game.get_grid()
+    starting_grid = [[item for item in row] for row in game.get_grid()]
 
     move_score, game_over = game.make_move(Direction(direction))
 
