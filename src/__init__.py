@@ -2,11 +2,9 @@ from datetime import datetime
 
 from flask import Flask, redirect, render_template, request
 
-import game_round
-import game_storage
-import git
-from env import GITHUB_URL, PRODUCTION, SECRET_KEY
-from game import Direction
+from . import game_round, game_storage, git
+from .env import GITHUB_URL, PRODUCTION, SECRET_KEY
+from .game import Direction
 
 app = Flask(__name__)
 
@@ -76,4 +74,8 @@ def click(direction: int):
         )
     )
 
-    return redirect(GITHUB_URL())
+    # Need to add a cache busting query parameter to force the page to
+    # fetch the latest version of the readme. Only needed when not logged
+    # in to GitHub. Weirdly, when logged in, GitHub always fetches the
+    # latest version of the readme.
+    return redirect(GITHUB_URL() + "?cacheBust=" + str(datetime.now().timestamp()))

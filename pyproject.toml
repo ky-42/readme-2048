@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "readme_2048"
+version = "1.0.0"
+description = "A flask app that lets you play 2048 on a github readme page."
+authors = ["Kyle <ky42@protonmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.1"
+Flask = "^3.1.0"
+psycopg = {extras = ["binary"], version = "^3.2.3"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

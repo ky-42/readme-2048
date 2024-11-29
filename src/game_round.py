@@ -5,7 +5,7 @@ from typing import Optional, Tuple
 
 import psycopg
 
-from env import DATABASE_URI
+from .env import DATABASE_URI
 
 # Create table if it doesn't exist
 with psycopg.connect(DATABASE_URI()) as conn:
@@ -84,7 +84,7 @@ def end(biggest_block: int, end_date: datetime) -> None:
                 raise Exception("No active round")
 
             cur.execute(
-                "UPDATE round SET (biggest_block, end_date, active) = (%s, %s, FALSE), WHERE active = TRUE",
+                "UPDATE round SET (biggest_block, end_date, active) = (%s, %s, FALSE) WHERE active = TRUE",
                 (biggest_block, end_date),
             )
 

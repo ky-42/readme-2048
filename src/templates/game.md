@@ -1,6 +1,6 @@
 <h3 align="center">2048</h3>
 <p align="center">
-  The current score is 24{% if end_date is not none %} and the highscore is {{ highscore }} which was set on {{ end_date }}.{% else %}.{% endif %}
+  The current score is {{current}}{% if end_date is not none %} and the highscore is {{ highscore }} which was set on {{ end_date }}.{% else %}.{% endif %}
 </p>
 
 <p align="center">

@@ -3,7 +3,7 @@
 import subprocess
 from pathlib import Path
 
-from env import UPDATE_FILE_NAME, UPDATE_FILE_PATH
+from .env import UPDATE_FILE_NAME, UPDATE_FILE_PATH
 
 
 def update(update_string: str) -> None:
