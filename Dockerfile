@@ -21,6 +21,8 @@ COPY --from=builder /app/dist/*.whl ./dist/
 # Install gunicorn and the application wheel
 RUN pip install --no-cache-dir gunicorn ./dist/*.whl
 
+RUN apt-get update && apt-get install -y git openssh-client
+
 # Expose port (optional, helpful for documentation)
 EXPOSE 5000
 

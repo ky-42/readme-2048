@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, redirect, render_template, request
 
 from . import game_round, game_storage, git
-from .env import GITHUB_URL, PRODUCTION, SECRET_KEY
+from .env import PRODUCTION, REDIRECT_URL, SECRET_KEY
 from .game import Direction
 
 app = Flask(__name__)
@@ -15,9 +15,12 @@ app.config.update(
 )
 
 
-@app.route("/")
+@app.route("/setup")
 def setup():
     """Use when first deployed to get the file to update."""
+
+    git.clone()
+    git.set_user_email()
 
     return click(1)
 
@@ -78,4 +81,4 @@ def click(direction: int):
     # fetch the latest version of the readme. Only needed when not logged
     # in to GitHub. Weirdly, when logged in, GitHub always fetches the
     # latest version of the readme.
-    return redirect(GITHUB_URL() + "?cacheBust=" + str(datetime.now().timestamp()))
+    return redirect(REDIRECT_URL() + "?cacheBust=" + str(datetime.now().timestamp()))
