@@ -25,12 +25,6 @@ def set_user_email() -> None:
         name (str): The name to set.
         email (str): The email to set.
     """
-    subprocess.run(
-        ["git", "config", "--global", "user.name", GIT_NAME()], cwd=WORKING_DIR()
-    )
-    subprocess.run(
-        ["git", "config", "--global", "user.email", GIT_EMAIL()], cwd=WORKING_DIR()
-    )
 
 
 def clone() -> None:
@@ -43,6 +37,11 @@ def clone() -> None:
     subprocess.run(
         ["git", "clone", REPO_CLONE_URL()], cwd=WORKING_DIR(), env=ENV, check=True
     )
+    repo_path = WORKING_DIR() / Path(
+        REPO_CLONE_URL().split("/")[-1].removesuffix(".git")
+    )
+    subprocess.run(["git", "config", "user.name", GIT_NAME()], cwd=repo_path)
+    subprocess.run(["git", "config", "user.email", GIT_EMAIL()], cwd=repo_path)
 
 
 def update(update_string: str) -> None:

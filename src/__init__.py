@@ -20,7 +20,6 @@ def setup():
     """Use when first deployed to get the file to update."""
 
     git.clone()
-    git.set_user_email()
 
     return click(1)
 
