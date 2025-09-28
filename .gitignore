@@ -1,19 +1,6 @@
-# Environment variables
+# Files
 .env
 
-# Docker Compose file
-compose.yaml
-# volume
-user_data 
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
-# Environments
-.venv
-
-# VS Code
-.vscode/
-
+# Directories
 dist/
+testing_env/

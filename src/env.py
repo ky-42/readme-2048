@@ -90,3 +90,17 @@ def SSH_DIR() -> Path:
 
         return ssh_dir
     raise Exception("SSH_DIR not set")
+
+
+def check_env_vars() -> None:
+    """Check if all required environment variables are set."""
+    PRODUCTION()
+    SECRET_KEY()
+    DATABASE_URI()
+    REDIRECT_URL()
+    REPO_CLONE_URL()
+    UPDATE_FILE_PATH()
+    WORKING_DIR()
+    GIT_NAME()
+    GIT_EMAIL()
+    SSH_DIR()

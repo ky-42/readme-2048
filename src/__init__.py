@@ -1,13 +1,17 @@
+"""Main application file for the Readme 2048 game."""
+
 from datetime import datetime
 
 from flask import Flask, redirect, render_template, request
 
 from . import game_round, game_storage, git
-from .env import PRODUCTION, REDIRECT_URL, SECRET_KEY
+from .env import PRODUCTION, REDIRECT_URL, SECRET_KEY, check_env_vars
 from .game import Direction
 
-app = Flask(__name__)
+# Make sure all required environment variables are set
+check_env_vars()
 
+app = Flask(__name__)
 app.config.update(
     TESTING=not PRODUCTION(),
     DEBUG=not PRODUCTION(),

@@ -13,18 +13,10 @@ from .env import (
     WORKING_DIR,
 )
 
+# Set up environment for git commands
 ENV = os.environ.copy()
 SSH_COMMAND = f"ssh -i {SSH_DIR()}/key -o IdentitiesOnly=yes -o UserKnownHostsFile={SSH_DIR()}/known_hosts -o StrictHostKeyChecking=yes"
 ENV["GIT_SSH_COMMAND"] = SSH_COMMAND
-
-
-def set_user_email() -> None:
-    """Set the git user name and email for commits.
-
-    Args:
-        name (str): The name to set.
-        email (str): The email to set.
-    """
 
 
 def clone() -> None:
@@ -37,6 +29,8 @@ def clone() -> None:
     subprocess.run(
         ["git", "clone", REPO_CLONE_URL()], cwd=WORKING_DIR(), env=ENV, check=True
     )
+
+    # Set git user config
     repo_path = WORKING_DIR() / Path(
         REPO_CLONE_URL().split("/")[-1].removesuffix(".git")
     )
