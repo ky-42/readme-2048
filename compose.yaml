@@ -1,0 +1,27 @@
+services:
+  readme-2048:
+    image: ky42/readme-2048:latest
+    container_name: readme-2048
+    ports:
+      - "5000:5000"
+    volumes:
+      - "/home/user/.ssh:/app/.ssh:ro"
+      - "./repos:/app/repos:rw"
+    env_file:
+      - ./.env
+    depends_on:
+      - readme-2048-postgres
+
+  readme-2048-postgres:
+    image: postgres:18-alpine
+    container_name: readme-2048-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=change_me
+      - POSTGRES_DB=readme2048
+    volumes:
+      - readme-2048-data:/var/lib/postgresql/data
+    restart: on-failure
+
+volumes:
+  readme-2048-data:
