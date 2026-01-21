@@ -58,9 +58,9 @@ def update(update_string: str) -> None:
     with open(update_file, "w") as f:
         f.write(update_string)
 
-    subprocess.run(["git", "add", update_file], cwd=update_path, check=True)
+    subprocess.run(["git", "add", update_file], cwd=update_path)
     subprocess.run(
-        ["git", "commit", "-m", f"Updated {update_file.name}"], cwd=update_path, check=True
+        ["git", "commit", "-m", f"Updated {update_file.name}"], cwd=update_path
     )
 
-    subprocess.run(["git", "push", "-f"], cwd=update_path, env=ENV, check=True)
+    subprocess.run(["git", "push", "-f"], cwd=update_path, env=ENV)
