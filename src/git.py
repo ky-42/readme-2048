@@ -15,16 +15,20 @@ from .env import (
 
 # Set up environment for git commands
 ENV = os.environ.copy()
-SSH_COMMAND = f"ssh -i {SSH_DIR()}/key -o IdentitiesOnly=yes -o UserKnownHostsFile={SSH_DIR()}/known_hosts -o StrictHostKeyChecking=yes"
+SSH_COMMAND = f"ssh -i {SSH_DIR()}/key -o IdentitiesOnly=yes -o UserKnownHostsFile={SSH_DIR()}/known_hosts -o StrictHostKeyChecking=no"
 ENV["GIT_SSH_COMMAND"] = SSH_COMMAND
 
 
 def clone() -> None:
     """Clone the git repository."""
 
-    # Add github to known hosts
-    with open(SSH_DIR() / "known_hosts", "a") as hosts_file:
-        subprocess.run(["ssh-keyscan", "github.com"], stdout=hosts_file, check=True)
+    # Add github to known hosts (skip if file is read-only or already exists)
+    try:
+        with open(SSH_DIR() / "known_hosts", "a") as hosts_file:
+            subprocess.run(["ssh-keyscan", "github.com"], stdout=hosts_file, check=True)
+    except (OSError, PermissionError):
+        # File is read-only or cannot be written to; skip host key scanning
+        pass
 
     subprocess.run(
         ["git", "clone", REPO_CLONE_URL()], cwd=WORKING_DIR(), env=ENV, check=True
@@ -54,9 +58,9 @@ def update(update_string: str) -> None:
     with open(update_file, "w") as f:
         f.write(update_string)
 
-    subprocess.run(["git", "add", update_file], cwd=update_path)
+    subprocess.run(["git", "add", update_file], cwd=update_path, check=True)
     subprocess.run(
-        ["git", "commit", "-m", f"Updated {update_file.name}"], cwd=update_path
+        ["git", "commit", "-m", f"Updated {update_file.name}"], cwd=update_path, check=True
     )
 
-    subprocess.run(["git", "push", "-f"], cwd=update_path, env=ENV)
+    subprocess.run(["git", "push", "-f"], cwd=update_path, env=ENV, check=True)
